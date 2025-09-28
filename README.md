@@ -56,3 +56,26 @@ Access Your Application
 HTTP: http://yourdomain.com
 
 HTTPS: https://yourdomain.com (auto-redirects from HTTP)
+===============
+
+# Kubernetes Manifests
+
+## Customization Required
+
+1. **Docker Image**: Update `deployment.yml` with your DockerHub image
+2. **Domain**: Update `ingress.yml` with your domain name
+3. **Email**: Update `cluster-issuer.yml` with your email
+
+## Deployment Order
+1. namespace.yml
+2. deployment.yml + service.yml
+3. Install cert-manager via Helm
+4. cluster-issuer.yml
+5. ingress.yml
+
+## Verification Commands
+```bash
+kubectl get pods -n online-shop-prod
+kubectl get svc -n online-shop-prod
+kubectl get ingress -n online-shop-prod
+kubectl get certificate -n online-shop-prod
